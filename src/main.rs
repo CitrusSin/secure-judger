@@ -37,7 +37,7 @@ fn main() {
     if result.accepted() {
         println!("Congratulations, accepted!");
     }
-    println!("-------------------------RESULT-------------------------");
+    println!("RESULT BEGIN>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     println!("{result}");
-    println!("-------------------------RESULT-------------------------");
+    println!("RESULT END>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 }

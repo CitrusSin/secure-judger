@@ -58,17 +58,16 @@ impl Display for JudgeStatus {
             Self::MemoryLimitExceeded   => "Memory Limit Exceeded",
             Self::PresentationError     => "Presentation Error",
             Self::RuntimeError(ek) => {
-                f.write_fmt(format_args!("{}: Runtime Error ({ek})", self.abbr()))?;
+                f.write_fmt(format_args!("[{}] Runtime Error ({ek})", self.abbr()))?;
                 return Ok(());
             },
             Self::ReturnNonZero(ret_val) => {
-                f.write_fmt(format_args!("{}: Return Value Not Zero ({ret_val})", self.abbr()))?;
+                f.write_fmt(format_args!("[{}] Return Value Not Zero ({ret_val})", self.abbr()))?;
                 return Ok(());
             }
         };
         let abbr = self.abbr();
-        f.write_fmt(format_args!("{abbr}: "))?;
-        f.write_str(message)?;
+        f.write_fmt(format_args!("[{abbr}] {message}"))?;
         Ok(())
     }
 }
@@ -212,6 +211,10 @@ impl JudgeSession {
     }
 }
 
+
+/*
+ *  Judge output files and give a result among AC, PE and WA
+ */
 fn compare_content(mut content1: File, mut content2: File) -> io::Result<JudgeStatus> {
     content1.seek(SeekFrom::Start(0))?;
     content2.seek(SeekFrom::Start(0))?;
